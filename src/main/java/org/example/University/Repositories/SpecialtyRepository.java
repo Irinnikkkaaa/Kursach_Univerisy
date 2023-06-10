@@ -1,4 +1,9 @@
 package org.example.University.Repositories;
 
-public interface SpecialtyRepository {
+import org.example.University.Models.Specialty;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SpecialtyRepository extends JpaRepository<Specialty, Long> {
 }
