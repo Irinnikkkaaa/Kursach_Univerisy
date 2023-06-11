@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("estimated")
@@ -97,5 +98,31 @@ public class EstimatedController {
         estimated.setDiscipline(discipline);
         estimatedRepository.save(estimated);
         return "redirect:/estimated";
+    }
+    @GetMapping("/filter")
+    public String filter(@RequestParam(required = false) String payment,
+                         @RequestParam(required = false) Integer estimation,
+                         Model model) {
+        Iterable<Estimated> estimateds = estimatedRepository.findAll();
+        Iterable<Teacher> teachers = teacherRepository.findAll();
+        Iterable<Student> students = studentRepository.findAll();
+        Iterable<TypeOfReport> typeOfReports = typeOfReportRepository.findAll();
+        Iterable<Discipline> disciplines = disciplineRepository.findAll();
+
+        if(payment != null && !payment.isEmpty()) {
+            estimateds = estimatedRepository.findByPayment(payment);
+        }
+        if(estimation != null) {
+            Optional<TypeOfReport> typeOfReport = typeOfReportRepository.findByName("Зачет");
+            estimateds = estimatedRepository.findByTypeOfReportAndEstimationGreaterThanEqual(typeOfReport, estimation);
+        }
+
+        model.addAttribute("estimateds", estimateds);
+        model.addAttribute("teachers", teachers);
+        model.addAttribute("students", students);
+        model.addAttribute("typeOfReports", typeOfReports);
+        model.addAttribute("disciplines", disciplines);
+
+        return "estimated";
     }
 }

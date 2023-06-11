@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Дисциплины</title>
+    <title>Кафедры</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -21,43 +21,36 @@
         <li><a th:href="@{/works}">Работает</a></li>
     </ul>
 </nav>
-<h1>Дисциплины</h1>
-<form th:action="@{/discipline/add}" method="post">
+<h1>Кафедры</h1>
+<form th:action="@{/department/add}" method="post">
     <input type="text" name="name" placeholder="Название" required>
-    <input type="text" name="difficulty_level" placeholder="Уровень сложности" required>
-    <select name="teacher" required>
-        <option selected disabled>Выберите преподавателя</option>
-        <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.fullname}"></option>
+    <input type="text" name="type" placeholder="Тип" required>
+    <select name="faculty" required>
+        <option selected disabled>Выберите факультет</option>
+        <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}"></option>
     </select>
     <button type="submit">Добавить</button>
-</form>
-<form th:action="@{/discipline/filter}" method="get">
-    <select name="teacher">
-        <option selected disabled>Выберите преподавателя</option>
-        <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.fullname}"></option>
-    </select>
-    <button type="submit">Поиск</button>
 </form>
 <table>
     <thead>
     <tr>
         <th>Название</th>
-        <th>Уровень сложности</th>
-        <th>Преподаватель</th>
+        <th>Тип</th>
+        <th>Факультет</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="discipline : ${disciplines}">
-        <td th:text="${discipline.name}"></td>
-        <td th:text="${discipline.difficulty_level}"></td>
-        <td th:text="${discipline.teacher.fullname}"></td>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.name}"></td>
+        <td th:text="${department.type}"></td>
+        <td th:text="${department.faculty.name}"></td>
         <td>
-            <form th:action="@{/discipline/delete/{id}(id=${discipline.id})}" method="post">
+            <form th:action="@{/department/delete/{id}(id=${department.id})}" method="post">
                 <button type="submit">Удалить</button>
             </form>
         </td>
         <td>
-            <form th:action="@{'/discipline/' + ${discipline.id}}">
+            <form th:action="@{'/department/' + ${department.id}}">
                 <button type="submit">Редактировать</button>
             </form>
         </td>

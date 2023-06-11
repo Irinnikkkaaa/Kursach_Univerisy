@@ -13,6 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Teacher {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
+    private Set<Discipline> disciplineSet = new LinkedHashSet<Discipline>();
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
     private Set<Works> worksSet = new LinkedHashSet<Works>();
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
     private Set<Estimated> estimatedSet = new LinkedHashSet<Estimated>();

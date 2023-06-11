@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Работает</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/works}">Назад</a>
+<h1>Работает</h1>
+<form th:action="@{/works/{id}(id=${works.id})}" method="post">
+    <input type="number" name="number_of_working_hours" placeholder="Количество рабочих часов" th:value="${works.number_of_working_hours}" required>
+    <select name="teacher" required>
+        <option selected disabled>Выберите преподаватель</option>
+        <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.fullname}" th:selected="${teacher.id == works.teacher.id}"></option>
+    </select>
+    <select name="department" required>
+        <option selected disabled>Выберите кафедра</option>
+        <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}" th:selected="${department.id == works.department.id}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

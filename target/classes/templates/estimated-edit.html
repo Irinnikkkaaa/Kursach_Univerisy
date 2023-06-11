@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Оценивается</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/estimated}">Назад</a>
+<h1>Оценивается</h1>
+<form th:action="@{/estimated/{id}(id=${estimated.id})}" method="post">
+    <input type="number" name="estimation" placeholder="Оценка" th:value="${estimated.estimation}" required>
+    <input type="text" name="payment" placeholder="Оплата" th:value="${estimated.payment}" required>
+    <input type="number" name="attempt_number" placeholder="Номер попытки" th:value="${estimated.attempt_number}" required>
+    <input type="date" name="date" th:value="${estimated.date}" required>
+    <select name="teacher" required>
+        <option selected disabled>Выберите учителя</option>
+        <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.fullname}" th:selected="${teacher.id == estimated.teacher.id}"></option>
+    </select>
+    <select name="student_id_number" required>
+        <option selected disabled>Выберите студента</option>
+        <option th:each="student : ${students}" th:value="${student.student_id_number}" th:text="${student.fullname}" th:selected="${student.student_id_number == estimated.student_id_number.student_id_number}"></option>
+    </select>
+    <select name="typeOfReport" required>
+        <option selected disabled>Выберите тип отчета</option>
+        <option th:each="typeOfReport : ${typeOfReports}" th:value="${typeOfReport.id}" th:text="${typeOfReport.name}" th:selected="${typeOfReport.id == estimated.typeOfReport.id}"></option>
+    </select>
+    <select name="discipline" required>
+        <option selected disabled>Выберите дисциплину</option>
+        <option th:each="discipline : ${disciplines}" th:value="${discipline.id}" th:text="${discipline.name}" th:selected="${discipline.id == estimated.discipline.id}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

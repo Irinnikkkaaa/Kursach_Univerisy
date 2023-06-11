@@ -14,8 +14,6 @@ import java.util.Set;
 public class Faculty {
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
     private Set<Department> departmentSet = new LinkedHashSet<Department>();
-    @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
-    private Set<Discipline> disciplineSet = new LinkedHashSet<Discipline>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

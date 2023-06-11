@@ -27,6 +27,6 @@ public class Discipline {
     private String difficulty_level;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "fk_faculty_id")
-    private Faculty faculty;
+    @JoinColumn(name = "fk_teacher_id")
+    private Teacher teacher;
 }

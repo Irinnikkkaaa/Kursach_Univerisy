@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Кафедры</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/department}">Назад</a>
+<h1>Кафедры</h1>
+<form th:action="@{/department/{id}(id=${department.id})}" method="post">
+    <input type="text" name="name" placeholder="Название" th:value="${department.name}" required>
+    <input type="text" name="type" placeholder="Тип" th:value="${department.type}" required>
+    <select name="faculty" required>
+        <option selected disabled>Выберите факультет</option>
+        <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}" th:selected="${faculty.id == department.faculty.id}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

@@ -83,4 +83,23 @@ public class StudiedController {
         studiedRepository.save(studied);
         return "redirect:/studied";
     }
+    @GetMapping("/filter")
+    public String filter(@RequestParam(required = false) Specialty specialty,
+                         Model model) {
+        Iterable<Studied> studieds = studiedRepository.findAll();
+        Iterable<Specialty> specialties = specialtyRepository.findAll();
+        Iterable<Discipline> disciplines = disciplineRepository.findAll();
+        Iterable<TypeOfReport> typeOfReports = typeOfReportRepository.findAll();
+
+        if(specialty != null) {
+            studieds = studiedRepository.findBySpecialty(specialty);
+        }
+
+        model.addAttribute("studieds", studieds);
+        model.addAttribute("specialties", specialties);
+        model.addAttribute("disciplines", disciplines);
+        model.addAttribute("typeOfReports", typeOfReports);
+
+        return "studied";
+    }
 }
