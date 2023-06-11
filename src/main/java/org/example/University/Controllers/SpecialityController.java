@@ -2,12 +2,9 @@ package org.example.University.Controllers;
 
 import org.example.University.Models.Specialty;
 import org.example.University.Repositories.SpecialtyRepository;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("specialty")

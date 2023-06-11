@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Преподаватель</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/department}">Кафедры</a></li>
+        <li><a th:href="@{/discipline}">Дисциплины</a></li>
+        <li><a th:href="@{/estimated}">Оценивается</a></li>
+        <li><a th:href="@{/faculty}">Факультет</a></li>
+        <li><a th:href="@{/group}">Группа</a></li>
+        <li><a th:href="@{/passes}">Сдает</a></li>
+        <li><a th:href="@{/specialty}">Специальность</a></li>
+        <li><a th:href="@{/student}">Студент</a></li>
+        <li><a th:href="@{/studied}">Изучает</a></li>
+        <li><a th:href="@{/teacher}">Преподаватель</a></li>
+        <li><a th:href="@{/type-of-report}">Вид отчета</a></li>
+        <li><a th:href="@{/works}">Работает</a></li>
+    </ul>
+</nav>
+<h1>Преподаватель</h1>
+<form th:action="@{/teacher/add}" method="post">
+    <input type="text" name="fullname" placeholder="ФИО" required>
+    <input type="text" name="position" placeholder="Должность" required>
+    <button type="submit">Добавить</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>ФИО</th>
+        <th>Должность</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.fullname}"></td>
+        <td th:text="${teacher.position}"></td>
+        <td>
+            <form th:action="@{/teacher/delete/{id}(id=${teacher.id})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/teacher/' + ${teacher.id}}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

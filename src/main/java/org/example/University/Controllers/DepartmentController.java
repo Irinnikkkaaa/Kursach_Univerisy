@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class DepartmentController {
     private final DepartmentRepository departmentRepository;
     private final FacultyRepository facultyRepository;
-
     public DepartmentController(DepartmentRepository departmentRepository, FacultyRepository facultyRepository) {
         this.departmentRepository = departmentRepository;
         this.facultyRepository = facultyRepository;
@@ -23,7 +22,7 @@ public class DepartmentController {
         Iterable<Department> departments = departmentRepository.findAll();
         Iterable<Faculty> faculties = facultyRepository.findAll();
         model.addAttribute("departments", departments);
-        model.addAttribute("departments", departments);
+        model.addAttribute("faculties", faculties);
         return "department";
     }
     @PostMapping("add")

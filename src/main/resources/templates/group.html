@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Группы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/department}">Кафедры</a></li>
+        <li><a th:href="@{/discipline}">Дисциплины</a></li>
+        <li><a th:href="@{/estimated}">Оценивается</a></li>
+        <li><a th:href="@{/faculty}">Факультет</a></li>
+        <li><a th:href="@{/group}">Группа</a></li>
+        <li><a th:href="@{/passes}">Сдает</a></li>
+        <li><a th:href="@{/specialty}">Специальность</a></li>
+        <li><a th:href="@{/student}">Студент</a></li>
+        <li><a th:href="@{/studied}">Изучает</a></li>
+        <li><a th:href="@{/teacher}">Преподаватель</a></li>
+        <li><a th:href="@{/type-of-report}">Вид отчета</a></li>
+        <li><a th:href="@{/works}">Работает</a></li>
+    </ul>
+</nav>
+<h1>Группы</h1>
+<form th:action="@{/group/add}" method="post">
+    <input type="number" name="number_of_students" placeholder="Количество студентов" required>
+    <select name="specialty" required>
+        <option selected disabled>Выберите специальность</option>
+        <option th:each="specialty : ${specialties}" th:value="${specialty.code}" th:text="${specialty.name}"></option>
+    </select>
+    <button type="submit">Добавить</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Количество студентов</th>
+        <th>Специальность</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group : ${groups}">
+        <td th:text="${group.number_of_students}"></td>
+        <td th:text="${group.specialty.name}"></td>
+        <td>
+            <form th:action="@{/group/delete/{id}(id=${group.number_of_group})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/group/' + ${group.number_of_group}}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

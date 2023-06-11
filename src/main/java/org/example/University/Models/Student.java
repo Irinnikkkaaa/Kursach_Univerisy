@@ -2,6 +2,9 @@ package org.example.University.Models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import lombok.*;
 @Entity
 @Getter
@@ -9,6 +12,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Student {
+    @OneToMany(mappedBy = "student_id_number", cascade = CascadeType.REMOVE)
+    private Set<Estimated> estimatedSet = new LinkedHashSet<Estimated>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long student_id_number;
@@ -23,5 +28,4 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "fk_group_id")
     private Group group;
-
 }

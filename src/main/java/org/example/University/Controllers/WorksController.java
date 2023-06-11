@@ -1,10 +1,9 @@
 package org.example.University.Controllers;
 
 import org.example.University.Models.Department;
-import org.example.University.Models.Discipline;
 import org.example.University.Models.Teacher;
 import org.example.University.Models.Works;
-import org.example.University.Repositories.DisciplineRepository;
+import org.example.University.Repositories.DepartmentRepository;
 import org.example.University.Repositories.TeacherRepository;
 import org.example.University.Repositories.WorksRepository;
 import org.springframework.stereotype.Controller;
@@ -16,22 +15,22 @@ import org.springframework.web.bind.annotation.*;
 public class WorksController {
     private final WorksRepository worksRepository;
     private final TeacherRepository teacherRepository;
-    private final DisciplineRepository disciplineRepository;
+    private final DepartmentRepository departmentRepository;
 
-    public WorksController(WorksRepository worksRepository, TeacherRepository teacherRepository, DisciplineRepository disciplineRepository) {
+    public WorksController(WorksRepository worksRepository, TeacherRepository teacherRepository, DepartmentRepository departmentRepository) {
         this.worksRepository = worksRepository;
         this.teacherRepository = teacherRepository;
-        this.disciplineRepository = disciplineRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @GetMapping
     public String all(Model model) {
         Iterable<Works> works = worksRepository.findAll();
         Iterable<Teacher> teachers = teacherRepository.findAll();
-        Iterable<Discipline> disciplines = disciplineRepository.findAll();
+        Iterable<Department> departments = departmentRepository.findAll();
         model.addAttribute("works", works);
         model.addAttribute("teachers", teachers);
-        model.addAttribute("disciplines", disciplines);
+        model.addAttribute("departments", departments);
         return "works";
     }
 
@@ -56,10 +55,10 @@ public class WorksController {
                       Model model) {
         Works works = worksRepository.findById(id).orElseThrow();
         Iterable<Teacher> teachers = teacherRepository.findAll();
-        Iterable<Discipline> disciplines = disciplineRepository.findAll();
+        Iterable<Department> departments = departmentRepository.findAll();
         model.addAttribute("works", works);
         model.addAttribute("teachers", teachers);
-        model.addAttribute("disciplines", disciplines);
+        model.addAttribute("departments", departments);
         return "works-edit";
     }
 

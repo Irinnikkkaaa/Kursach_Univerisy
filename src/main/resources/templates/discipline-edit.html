@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Дисциплины</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/discipline}">Назад</a>
+<h1>Дисциплины</h1>
+<form th:action="@{/discipline/{id}(id=${discipline.id})}" method="post">
+    <input type="text" name="name" placeholder="Название" th:value="${discipline.name}" required>
+    <input type="text" name="difficulty_level" placeholder="Тип" th:value="${discipline.difficulty_level}" required>
+    <select name="faculty" required>
+        <option selected disabled>Выберите факультет</option>
+        <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}" th:selected="${faculty.id == discipline.faculty.id}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

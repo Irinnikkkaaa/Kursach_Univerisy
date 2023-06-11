@@ -4,12 +4,9 @@ import org.example.University.Models.Discipline;
 import org.example.University.Models.Faculty;
 import org.example.University.Repositories.DisciplineRepository;
 import org.example.University.Repositories.FacultyRepository;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("discipline")

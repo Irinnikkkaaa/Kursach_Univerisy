@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Студенты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/department}">Кафедры</a></li>
+        <li><a th:href="@{/discipline}">Дисциплины</a></li>
+        <li><a th:href="@{/estimated}">Оценивается</a></li>
+        <li><a th:href="@{/faculty}">Факультет</a></li>
+        <li><a th:href="@{/group}">Группа</a></li>
+        <li><a th:href="@{/passes}">Сдает</a></li>
+        <li><a th:href="@{/specialty}">Специальность</a></li>
+        <li><a th:href="@{/student}">Студент</a></li>
+        <li><a th:href="@{/studied}">Изучает</a></li>
+        <li><a th:href="@{/teacher}">Преподаватель</a></li>
+        <li><a th:href="@{/type-of-report}">Вид отчета</a></li>
+        <li><a th:href="@{/works}">Работает</a></li>
+    </ul>
+</nav>
+<h1>Студенты</h1>
+<form th:action="@{/student/add}" method="post">
+    <input type="text" name="status" placeholder="Статус" required>
+    <input type="text" name="fullname" placeholder="ФИО" required>
+    <input type="date" name="date_of_birth" required>
+    <select name="group" required>
+        <option selected disabled>Выберите группу</option>
+        <option th:each="group : ${groups}" th:value="${group.number_of_group}" th:text="${group.number_of_group}"></option>
+    </select>
+    <button type="submit">Добавить</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Статус</th>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Группа</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.status}"></td>
+        <td th:text="${student.fullname}"></td>
+        <td th:text="${student.date_of_birth}"></td>
+        <td th:text="${student.group.number_of_group}"></td>
+        <td>
+            <form th:action="@{/student/delete/{id}(id=${student.student_id_number})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/student/' + ${student.student_id_number}}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

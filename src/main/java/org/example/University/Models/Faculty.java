@@ -1,16 +1,21 @@
 package org.example.University.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Faculty {
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
+    private Set<Department> departmentSet = new LinkedHashSet<Department>();
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
+    private Set<Discipline> disciplineSet = new LinkedHashSet<Discipline>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

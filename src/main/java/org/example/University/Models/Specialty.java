@@ -1,10 +1,10 @@
 package org.example.University.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -12,6 +12,10 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Specialty {
+    @OneToMany(mappedBy = "specialty", cascade = CascadeType.REMOVE)
+    private Set<Studied> studiedSet = new LinkedHashSet<Studied>();
+    @OneToMany(mappedBy = "specialty", cascade = CascadeType.REMOVE)
+    private Set<Group> groupSet = new LinkedHashSet<Group>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long code;

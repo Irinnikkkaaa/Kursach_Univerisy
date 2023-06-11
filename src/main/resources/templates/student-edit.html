@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Студенты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/student}">Назад</a>
+<h1>Студенты</h1>
+<form th:action="@{/student/{id}(id=${student.student_id_number})}" method="post">
+    <input type="text" name="status" placeholder="Статус" th:value="${student.status}" required>
+    <input type="text" name="fullname" placeholder="ФИО" th:value="${student.fullname}" required>
+    <input type="date" name="date_of_birth" th:value="${student.date_of_birth}" required>
+    <select name="group" required>
+        <option selected disabled>Выберите группу</option>
+        <option th:each="group : ${groups}" th:value="${group.number_of_group}" th:text="${group.number_of_group}" th:selected="${group.number_of_group == student.group.number_of_group}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

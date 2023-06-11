@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Изучает</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/department}">Кафедры</a></li>
+        <li><a th:href="@{/discipline}">Дисциплины</a></li>
+        <li><a th:href="@{/estimated}">Оценивается</a></li>
+        <li><a th:href="@{/faculty}">Факультет</a></li>
+        <li><a th:href="@{/group}">Группа</a></li>
+        <li><a th:href="@{/passes}">Сдает</a></li>
+        <li><a th:href="@{/specialty}">Специальность</a></li>
+        <li><a th:href="@{/student}">Студент</a></li>
+        <li><a th:href="@{/studied}">Изучает</a></li>
+        <li><a th:href="@{/teacher}">Преподаватель</a></li>
+        <li><a th:href="@{/type-of-report}">Вид отчета</a></li>
+        <li><a th:href="@{/works}">Работает</a></li>
+    </ul>
+</nav>
+<h1>Изучает</h1>
+<form th:action="@{/studied/add}" method="post">
+    <input type="number" name="number_of_hours" placeholder="Количество часов" required>
+    <select name="specialty" required>
+        <option selected disabled>Выберите специальность</option>
+        <option th:each="specialty : ${specialties}" th:value="${specialty.code}" th:text="${specialty.name}"></option>
+    </select>
+    <select name="discipline" required>
+        <option selected disabled>Выберите дисциплину</option>
+        <option th:each="discipline : ${disciplines}" th:value="${discipline.id}" th:text="${discipline.name}"></option>
+    </select>
+    <select name="typeOfReport" required>
+        <option selected disabled>Выберите тип отчета</option>
+        <option th:each="typeOfReport : ${typeOfReports}" th:value="${typeOfReport.id}" th:text="${typeOfReport.name}"></option>
+    </select>
+    <button type="submit">Добавить</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Количество часов</th>
+        <th>Специальность</th>
+        <th>Дисциплина</th>
+        <th>Тип отчета</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="studied : ${studieds}">
+        <td th:text="${studied.number_of_hours}"></td>
+        <td th:text="${studied.specialty.name}"></td>
+        <td th:text="${studied.discipline.name}"></td>
+        <td th:text="${studied.typeOfReport.name}"></td>
+        <td>
+            <form th:action="@{/studied/delete/{id}(id=${studied.id})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/studied/' + ${studied.id}}">
+                <button type="submit">Редактировать</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

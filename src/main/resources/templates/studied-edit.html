@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Изучает</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/studied}">Назад</a>
+<h1>Изучает</h1>
+<form th:action="@{/studied/{id}(id=${studied.id})}" method="post">
+    <input type="number" name="number_of_hours" placeholder="Количество часов" th:value="${studied.number_of_hours}" required>
+    <select name="specialty" required>
+        <option selected disabled>Выберите специальность</option>
+        <option th:each="specialty : ${specialties}" th:value="${specialty.code}" th:text="${specialty.name}" th:selected="${specialty.code == studied.specialty.code}"></option>
+    </select>
+    <select name="discipline" required>
+        <option selected disabled>Выберите дисциплину</option>
+        <option th:each="discipline : ${disciplines}" th:value="${discipline.id}" th:text="${discipline.name}" th:selected="${discipline.id == studied.discipline.id}"></option>
+    </select>
+    <select name="typeOfReport" required>
+        <option selected disabled>Выберите тип отчета</option>
+        <option th:each="typeOfReport : ${typeOfReports}" th:value="${typeOfReport.id}" th:text="${typeOfReport.name}" th:selected="${typeOfReport.id == studied.typeOfReport.id}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

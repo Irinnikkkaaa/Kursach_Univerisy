@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Группы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/group}">Назад</a>
+<h1>Группы</h1>
+<form th:action="@{/group/{id}(id=${group.number_of_group})}" method="post">
+    <input type="number" name="number_of_students" placeholder="Количество студентов" th:value="${group.number_of_students}" required>
+    <select name="specialty" required>
+        <option selected disabled>Выберите специальность</option>
+        <option th:each="specialty : ${specialties}" th:value="${specialty.code}" th:text="${specialty.name}" th:selected="${specialty.code == group.specialty.code}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>
