@@ -85,6 +85,7 @@ public class StudiedController {
     }
     @GetMapping("/filter")
     public String filter(@RequestParam(required = false) Specialty specialty,
+                         @RequestParam(required = false) TypeOfReport typeOfReport,
                          Model model) {
         Iterable<Studied> studieds = studiedRepository.findAll();
         Iterable<Specialty> specialties = specialtyRepository.findAll();
@@ -93,6 +94,9 @@ public class StudiedController {
 
         if(specialty != null) {
             studieds = studiedRepository.findBySpecialty(specialty);
+        }
+        if(specialty != null && typeOfReport !=null){
+            studieds=studiedRepository.findBySpecialtyAndTypeOfReport(specialty,typeOfReport);
         }
 
         model.addAttribute("studieds", studieds);

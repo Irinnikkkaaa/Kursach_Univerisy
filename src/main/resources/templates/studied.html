@@ -3,6 +3,7 @@
 <head>
     <title>Изучает</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/main.css}">
 </head>
 <body>
 <nav>
@@ -42,6 +43,10 @@
     <select name="specialty">
         <option selected disabled>Выберите специальность</option>
         <option th:each="specialty : ${specialties}" th:value="${specialty.code}" th:text="${specialty.name}"></option>
+    </select>
+    <select name="typeOfReport">
+        <option selected disabled>Выберите вид отчета</option>
+        <option th:each="typeOfReport : ${typeOfReports}" th:value="${typeOfReport.id}" th:text="${typeOfReport.name}"></option>
     </select>
     <button type="submit">Поиск</button>
 </form>
